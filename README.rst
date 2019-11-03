@@ -52,3 +52,17 @@ Credits
 - Original author: `Emmanuel Pauchard <https://github.com/EmmanuelPauchard>`__
 - Current maintainer: `Emmanuel Pauchard <https://github.com/EmmanuelPauchard>`__
 - `Contributors <https://github.com/EmmanuelPauchard/mopidy-gpio/graphs/contributors>`_
+
+
+Usage
+=======
+
+- Project goals
+Create a very simple HMI to a Raspberry PI used as a music player. The controls are push-buttons where each button is associated with a playlist. When button is pressed, the playlist should start.
+
+- Design planning
+
+# Configure plugin to find and initialize playlists
+# Create configuration file syntax and example (needs: associate button/playlist)
+# Add remote playlist (web radio, podcast)
+# Add volume control by external potentiometer
