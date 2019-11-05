@@ -23,7 +23,21 @@ class GpioFrontend(pykka.ThreadingActor, core.CoreListener):
         GPIO.setup(14, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.add_event_detect(14, GPIO.FALLING, self.play_pause, 1000)
         GPIO.setup(15, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.add_event_detect(15, GPIO.FALLING, self.next, 1000)
+        GPIO.add_event_detect(15, GPIO.FALLING, self.set_playlist, 1000)
+
+        self.playlists = ["vivaldi", "bach", "bizet", "tchaikowsky"]
+        self.current_playlist = 0
+
+    def set_playlist(self, channel):
+        self.current_playlist = (self.current_playlist + 1) % len(self.playlists)
+        logger.info("Set playlist to {}".format(self.playlists[self.current_playlist]))
+        self.core.tracklist.clear()
+        for playlist in self.core.playlists.playlists.get():
+            logger.info("\t playlist: {}".format(playlist))
+            if playlist.name == self.playlists[self.current_playlist]:
+                for track in playlist.tracks:
+                    self.core.tracklist.add(uri=track.uri)
+        self.core.playback.play()
 
     def play_pause(self, channel):
         logger.info("GPIO frontend: Toggle")

@@ -37,6 +37,9 @@ Mopidy-gpio to your Mopidy configuration file::
     [gpio]
     # TODO: Add example of extension config
 
+.. note::
+    Using this package requires to be part of the "gpio" group.
+    If running Mopidy as a service, make sure you have added user "mopidy" to the "gpio" group.
 
 Project resources
 =================
