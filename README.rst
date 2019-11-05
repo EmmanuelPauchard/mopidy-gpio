@@ -35,7 +35,22 @@ Before starting Mopidy, you must add configuration for
 Mopidy-gpio to your Mopidy configuration file::
 
     [gpio]
-    # TODO: Add example of extension config
+
+    .. confval:: gpio/button_pud
+
+        Configure button pull up/down here - must comply to RPi.GPIO syntax, ie: PUD_UP, PUD_DOWN
+
+
+    .. confval:: gpio/button_logical_level
+
+        Configure button logical active level - must comply to RPi.GPIO syntax, ie: LOW, HIGH
+
+
+    .. confval:: gpio/button_config
+
+        gpio config is a map of {PIN number (int, BCM mode): (uri to play (string) or ("stop"|"toggle"), LED name (int, BCM mode))}
+        If LED name is not None, then the LED will be powered on when uri is started, while all other LED will be switched off
+
 
 .. note::
     Using this package requires to be part of the "gpio" group.
