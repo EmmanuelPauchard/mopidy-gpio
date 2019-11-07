@@ -13,14 +13,11 @@ logger = logging.getLogger(__name__)
 
 button_pud = "PUD_UP"
 button_logical_level = "LOW"
-button_config = {14: ("m3u:vivaldi", 3),
-                 15: ("m3u:bizet", 4),
-                 18: ("m3u:tchaikowsky", 17),
-                 23: ("m3u:bach", 27),
-                 24: ("m3u:mozart", 22),
-                 25: ("previous", 10),
-                 8: ("toggle", 9),
-                 7: ("next", 11)}
+button_config = {15: ("m3u:2", 14),
+                 24: ("m3u:3", 23),
+                 8: ("m3u:1", 25),
+                 20: ("m3u:4", 16),
+                 3: ("m3u:5", 4)}
 
 button_event_direction = {"LOW": GPIO.FALLING,
                           "HIGH": GPIO.RISING}
@@ -42,7 +39,7 @@ class GpioFrontend(pykka.ThreadingActor, core.CoreListener):
         for button_gpio, (action, led_gpio) in self.button_config.items():
             GPIO.setup(button_gpio, GPIO.IN, pull_up_down=getattr(GPIO, button_pud))
             if led_gpio:
-                GPIO.setup(led_gpio, GPIO.OUT)
+                GPIO.setup(led_gpio, GPIO.OUT, initial=GPIO.LOW)
             GPIO.add_event_detect(button_gpio, button_event_direction[button_logical_level], self._filter, 300)
 
     def _is_gpio_active(self, value):

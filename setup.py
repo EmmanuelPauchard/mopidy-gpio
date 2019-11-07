@@ -28,6 +28,7 @@ setup(
         "setuptools",
         "Mopidy >= 2.2",
         "Pykka >= 2.0",
+        "RPi.GPIO",
     ],
     entry_points={
         "mopidy.ext": [
