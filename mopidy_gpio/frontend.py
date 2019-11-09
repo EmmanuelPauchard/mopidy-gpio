@@ -15,9 +15,9 @@ button_pud = "PUD_UP"
 button_logical_level = "LOW"
 button_config = {15: ("m3u:2", 14),
                  24: ("m3u:3", 23),
-                 8: ("m3u:1", 25),
-                 20: ("m3u:4", 16),
-                 3: ("m3u:5", 4)}
+                 8: ("m3u:4", 25),
+                 20: ("m3u:5", 16),
+                 3: ("m3u:1", 4)}
 
 button_event_direction = {"LOW": GPIO.FALLING,
                           "HIGH": GPIO.RISING}
