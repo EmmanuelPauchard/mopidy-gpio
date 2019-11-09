@@ -28,6 +28,7 @@ class GpioFrontend(pykka.ThreadingActor, core.CoreListener):
         logger.info("Starting Mopidy GPIO frontend")
 
         self.core = core
+	self.current_uri = "" 
 
         # fixme: can't get our config validated by mopidy - nevermind
         self.logical_active_level = getattr(GPIO, button_logical_level)
@@ -70,6 +71,13 @@ class GpioFrontend(pykka.ThreadingActor, core.CoreListener):
         :param: channel: the GPIO channel (BCM mode)
         """
         action, led = self.button_config[channel]
+	if self.current_uri == action:
+            logger.info("GPIO frontend: Next (multiple press)")
+ 	    self.core.playback.next()
+            return
+	else:
+            self.current_uri = action		
+
         if "m3u:" == action[:4]:
             self.set_playlist(action[4:])
         elif "toggle" == action:
